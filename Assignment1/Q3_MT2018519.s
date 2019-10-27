@@ -1,6 +1,6 @@
-;ARM__Assignment-1
-;Sarvesh Nandkar : MT2018519
-;EVEN or ODD
+; ARM__Assignment-1
+; Sarvesh Nandkar : MT2018519
+; EVEN or ODD
 
 THUMB
 
