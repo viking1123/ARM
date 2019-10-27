@@ -1,5 +1,6 @@
-;ARM ARCHITECTURE--Assignment-1 
+; ARM ARCHITECTURE--Assignment-1 
 ; Sarvesh Nandkar-MT2018519
+; GCD of 2 numbers
 
      AREA     first, CODE, READONLY
      EXPORT __main
