@@ -1,6 +1,6 @@
-;ARM__Assignment-1
-;Sarvesh Nankdar : MT2018519
-;largest number of 3  numbers
+; ARM__Assignment-1
+; Sarvesh Nankdar : MT2018519
+; largest number of 3  numbers
 
    THUMB
 	 AREA     first, CODE, READONLY
