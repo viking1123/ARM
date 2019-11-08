@@ -1,0 +1,41 @@
+;ARM__Assignment-1
+;SARVESH NANDKAR : MT2018519
+;if 10<r1<15 make r0=1
+
+		THUMB
+		AREA     first, CODE, READONLY
+     	EXPORT __main
+     	ENTRY 
+__main function
+		  MOV r0,#0		
+		  MOV r1,#12	
+		  CMP r1,#10
+		  ITE LT
+		  MOV r0,#0
+		  ITE GT
+		  MOV r0,#1
+		  MOV r0,#0
+		  
+stop    B stop ; stop program
+     ENDFUNC
+     END 
+	 
+	 
+	 ;ERRORS:
+	; first.s(15): error: A1619E: Specified condition is not consistent with previous IT
+	;first.s(16): error: A1603E: This instruction inside IT block has UNPREDICTABLE results
+	
+	
+	In the arm manual it is found that,
+
+The following instructions are not permitted in an IT block:
+
+IT
+
+CBZ and CBNZ
+
+TBB and TBH
+
+CPS, CPSID and CPSIE
+
+SETEND.
