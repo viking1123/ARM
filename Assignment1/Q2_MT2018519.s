@@ -5,7 +5,7 @@
 ; outputs: R3
 
 	 THUMB
-     AREA     appcode, CODE, READONLY
+     AREA     first, CODE, READONLY
      EXPORT __main
 	 ENTRY 
 __main  FUNCTION		 		
