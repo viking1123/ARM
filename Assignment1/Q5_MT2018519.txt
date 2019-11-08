@@ -1,0 +1,2 @@
+Inputs can be given to the STMF32 board by connecting any external sensors to the GPIO pins ,push buttons, connections via  
+USB cable or any such extra hardware.
