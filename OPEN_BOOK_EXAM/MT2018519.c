@@ -23,3 +23,4 @@ void printMsg2(const int a)
       ++ptr;
    }
 }
+
