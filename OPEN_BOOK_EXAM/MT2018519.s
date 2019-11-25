@@ -31,10 +31,10 @@ loop1  BL sinecosine
 
        VMUL.F32 s29,s29,s5	 ;y = r * sintheta
 
-;change origin (0.0) to (239,319) for VGA
+;change origin (0.0) to (250,350) for VGA
 
-       VLDR.F32 s27, =239
-       VLDR.F32 s26, =319
+       VLDR.F32 s27, =250
+       VLDR.F32 s26, =350
        
 ;Generalized circle : x= a+r*costheta	y=b+r*sintheta  
 
