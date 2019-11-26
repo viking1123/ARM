@@ -160,7 +160,6 @@ calculation       ;z=wo.x0 + w1.x1 + w2.x2
    			     ;VADD.F32 s22,s22,s21   ;z = w0.x0 + w1.x1 + w2.x2 + bias;Z is stored in s9
   				  B exp1
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 exp1    		;VMOV.F32 S9,R9;Moving the bit stream in R1('i') to S5(floating point register)
 				CMP R1,R2;Compare 'i' and 'n' 
