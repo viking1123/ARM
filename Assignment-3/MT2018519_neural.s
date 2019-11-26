@@ -11,10 +11,10 @@ __main  FUNCTION
 				VLDR.F32 s22,=0   ;
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
    				;CMP R9,R10
 				;BLE exp1
-;;;;;;;;;;;;;;;to select the logic :use of switch case;;;;;;;;;;
+;to select the logic :use of switch case
 		MOV R3,#4;for logic selection
 		MOV R11,#4;for dataset selection		
 		MOV R4,#1 ;for logic and
@@ -24,7 +24,7 @@ __main  FUNCTION
 		MOV R8,#5;for logic nor 
 		MOV R9,#6 ;for logic xor
 		MOV R10,#7 ;for logic xnor 
-;;;;;;;;;;;;;;switch case for dataset;;;;;;;;;;;;;;;		
+;switch case for dataset	
         CMP R11,R4
 		BEQ set_1 
 
@@ -193,7 +193,5 @@ Sigmoid  		VLDR.F32 S12,=1
 				MOV R3,R6
 				BL printMsg
 stop       B   stop		   
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
         endfunc
       end
