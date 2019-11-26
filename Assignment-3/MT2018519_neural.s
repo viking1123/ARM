@@ -39,7 +39,7 @@ __main  FUNCTION
 		
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;dataset selection;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;dataset selection
 
 set_1   VLDR.F32 s0 , =1 ;data 1 (x1)
         VLDR.F32 s1 , =0 ;data 2 (x2)
@@ -65,7 +65,7 @@ set_4	VLDR.F32 s0 , =1 ;data 1 (x1)
 
 
 
-;;;;;;;;;;;;;;;;;;;;switch case for logic;;;;;;;;;;;;;;		
+;switch case for logic;	
 calculation1    CMP R3,R4
 				BEQ logic_and 
 
