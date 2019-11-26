@@ -88,13 +88,13 @@ calculation1    CMP R3,R4
 				BEQ logic_xnor
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;logics to select;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;logics to select
 
 logic_and          ;weights w0 w1 w2
-				   VLDR.F32 s3 ,=-0.1 	;w0
-		           VLDR.F32 s4 ,=0.2    ;w1   
-                   VLDR.F32	s5 ,=0.2 	;w2
-				   ;Bias
+		   VLDR.F32 s3 ,=-0.1 	;w0
+		   VLDR.F32 s4 ,=0.2    ;w1   
+                   VLDR.F32 s5 ,=0.2 	;w2
+		   ;Bias
                    VLDR.F32 s6 ,=-0.2;  bias  
                    B  calculation
 
