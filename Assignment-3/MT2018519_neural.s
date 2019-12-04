@@ -1,4 +1,4 @@
- 	 	AREA	appcode, CODE, READONLY
+	AREA	appcode, CODE, READONLY
 		IMPORT printMsg
 		export __main
 		ENTRY
@@ -9,7 +9,14 @@ __main  function
 		VLDR.F32 S30,=0	;X1
 		VLDR.F32 S31,=1	;X2
 		
-		MOV R7,#5		;Input to R7 decides the logic_gate
+		MOV R0,#1
+		MOV R1,#0
+		MOV R2,#1
+		ADR.W  R6, BranchTable_Byte 
+		
+		MOV R7,#2		;Input to R7 decides the logic_gate
+		
+		TBB   [R6, R7] ; switch case equivalent in Arm cortex M4 
 		
 		CMP R7,#1
 		BEQ LOGIC_AND
@@ -103,15 +110,25 @@ SIGMOID		VDIV.F32 S2, S3, S2 		; 1/e^x
 			VADD.F32 S2, S3, S2 		; 1 + 1/e^x
 			VDIV.F32 S2, S3, S2 		; 1/(1 + 1/e^x)
 			B OUTPUT
+			
+;offset calculation for switch case
+BranchTable_Byte	DCB    0
+					DCB ((LOGIC_OR-LOGIC_AND)/2)
+					DCB ((LOGIC_NOT-LOGIC_AND)/2)
+					DCB ((LOGIC_NAND-LOGIC_AND)/2)
+					DCB ((LOGIC_NOR-LOGIC_AND)/2)
+					DCB ((LOGIC_XOR-LOGIC_AND)/2)
+					DCB ((LOGIC_XNOR-LOGIC_AND)/2)
 
-; S15 will hold 0.5 for comparison to finalise the logical output for a particular gate
+
+;S15 will hold 0.5 for comparison to finalise the logical output for a particular gate
 OUTPUT		VLDR.F32 S15 ,=0.5
 			VCMP.F32 S2, S15 			; compare the output with S15
 			VMRS.F32 APSR_nzcv,FPSCR 	; Transfer floating-point flags to the APSR flags
 			ITE HI
-			MOVHI R0,#1					; if S2 > S15
-			MOVLS R0,#0					; if S2 < S15
-			BL printMsg	
+			MOVHI R4,#1					; if S2 > S15
+			MOVLS R4,#0					; if S2 < S15
+			BL printMsg
 			
 stop 		B  stop 
 			endfunc
