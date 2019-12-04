@@ -5,15 +5,20 @@
 __main  function
 
 		;INPUTS
-		VLDR.F32 S29,=1 ;X0
-		VLDR.F32 S30,=0	;X1
-		VLDR.F32 S31,=1	;X2
+		MOV R0,#1;	a1
+		VMOV.F32 S29,R0;			
+		VCVT.F32.S32 S29,S29; 	
+
+		MOV R1,#0;	a2
+		VMOV.F32 S30,R1;			
+		VCVT.F32.S32 S30,S30; 		
 		
-		MOV R0,#1
-		MOV R1,#0
-		MOV R2,#1
+		MOV R2,#1;	a3
+		VMOV.F32 S31,R2;			
+		VCVT.F32.S32 S31,S31; 		
+
 		
-		MOV R7,#4		;Input to R7 decides the logic_gate
+		MOV R7,#1		;Input to R7 decides the logic_gate
 		
 		CMP R7,#1
 		BEQ LOGIC_AND
