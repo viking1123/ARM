@@ -2,14 +2,71 @@
 #include <string.h>
 #include<stdio.h>
 
-void printMsg(const int a)
+void printMsg(const int a, const int b, const int c, const int d)
 {
 	 char Msg[100];
 	 char *ptr;
-	 sprintf(Msg, "%x", a);
+	 // Printing the message
+	sprintf(Msg,"Truth Table \n x1:  ");
 	 ptr = Msg ;
-   while(*ptr != '\0'){
+   while(*ptr != '\0')
+	 {
       ITM_SendChar(*ptr);
       ++ptr;
    }
+	 //Printing the first parameter
+	 sprintf(Msg, "%x", a);
+	 ptr = Msg ;
+   while(*ptr != '\0')
+	 {
+      ITM_SendChar(*ptr);
+      ++ptr;
+   }
+	 // Printing the message
+	 sprintf(Msg,"\t x2: ");
+	 ptr = Msg ;
+   while(*ptr != '\0')
+	 {
+      ITM_SendChar(*ptr);
+      ++ptr;
+   }
+	 sprintf(Msg, "%x", b);
+	 ptr = Msg ;
+   while(*ptr != '\0')
+	 {
+      ITM_SendChar(*ptr);
+      ++ptr;
+   }
+	 // Printing the message
+	 sprintf(Msg,"\tx3: ");
+	 ptr = Msg ;
+   while(*ptr != '\0')
+	 {
+      ITM_SendChar(*ptr);
+      ++ptr;
+   }
+	 sprintf(Msg, "%x", c);
+	 ptr = Msg ;
+   while(*ptr != '\0')
+	 {
+      ITM_SendChar(*ptr);
+      ++ptr;
+   }
+	 // Printing the message
+	 sprintf(Msg,"\tOutput: ");
+	 ptr = Msg ;
+   while(*ptr != '\0')
+	 {
+      ITM_SendChar(*ptr);
+      ++ptr;
+   }
+	 sprintf(Msg, "%x", d);
+	 ptr = Msg ;
+   while(*ptr != '\0')
+	 {
+      ITM_SendChar(*ptr);
+      ++ptr;
+	 }
+
+	
 }
