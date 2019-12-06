@@ -1,128 +1,384 @@
-		AREA	appcode, CODE, READONLY
-		IMPORT printMsg
-		export __main
-		ENTRY
-__main  function
-
-		;INPUTS
-		MOV R0,#1;	a1
-		VMOV.F32 S29,R0;			
-		VCVT.F32.S32 S29,S29; 	
-
-		MOV R1,#0;	a2
-		VMOV.F32 S30,R1;			
-		VCVT.F32.S32 S30,S30; 		
-		
-		MOV R2,#1;	a3
-		VMOV.F32 S31,R2;			
-		VCVT.F32.S32 S31,S31; 		
-
-		
-		MOV R7,#1		;Input to R7 decides the logic_gate
-		
-		CMP R7,#1
-		BEQ LOGIC_AND
-		
-		CMP R7,#2
-		BEQ LOGIC_OR
-		
-		CMP R7,#3
-		BEQ LOGIC_NOT
-		
-		CMP R7,#4
-		BEQ LOGIC_NAND
-		
-		CMP R7,#5
-		BEQ LOGIC_NOR
-		B NXT
+     THUMB
+     AREA   appcode, CODE, READONLY
+     EXPORT __main
+	 IMPORT printAnd
+	 IMPORT printOr
+	 IMPORT printNand
+	 IMPORT printNor
+	 IMPORT printNot
+     IMPORT printMsg4p
+	   ENTRY 
+__main  FUNCTION
 	
-;S0 = W0,S1 = W1, S2 = W2, S3 = bias	
-LOGIC_AND	VLDR.F32 S0,=-0.1
+;S0 = W0,S1 = W1, S2 = W2, S3 = bias
+;giving inputs to each gate and then loading them into fp registers
+LOGIC_AND1	BL printAnd
+			VLDR.F32 S0,=-0.1
 			VLDR.F32 S1,=0.2
 			VLDR.F32 S2,=0.2
 			VLDR.F32 S3,=-0.2
+			MOV R0,#1		; a0
+			MOV R1,#0		; a1
+			MOV R2,#0		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
 			B EXP_CALC
+			LTORG
 			
-LOGIC_OR	VLDR.F32 S0,=-0.1
+LOGIC_AND2	VLDR.F32 S0,=-0.1
+			VLDR.F32 S1,=0.2
+			VLDR.F32 S2,=0.2
+			VLDR.F32 S3,=-0.2
+			MOV R0,#1		; a0
+			MOV R1,#0		; a1
+			MOV R2,#1		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
+			B EXP_CALC
+			LTORG
+			
+LOGIC_AND3	VLDR.F32 S0,=-0.1
+			VLDR.F32 S1,=0.2
+			VLDR.F32 S2,=0.2
+			VLDR.F32 S3,=-0.2
+			MOV R0,#1		; a0
+			MOV R1,#1		; a1
+			MOV R2,#0		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
+			B EXP_CALC
+			LTORG
+			
+LOGIC_AND4	VLDR.F32 S0,=-0.1
+			VLDR.F32 S1,=0.2
+			VLDR.F32 S2,=0.2
+			VLDR.F32 S3,=-0.2
+			MOV R0,#1		; a0
+			MOV R1,#1		; a1
+			MOV R2,#1		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
+			B EXP_CALC
+			LTORG
+			
+LOGIC_OR1	BL printOr
+			VLDR.F32 S0,=-0.1
 			VLDR.F32 S1,=0.7
 			VLDR.F32 S2,=0.7
 			VLDR.F32 S3,=-0.1
+			MOV R0,#1		; a0
+			MOV R1,#0		; a1
+			MOV R2,#0		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
 			B EXP_CALC
+			LTORG
 			
-LOGIC_NOT	VLDR.F32 S0,=0.5
-			VLDR.F32 S1,=-0.7
-			VLDR.F32 S2,=0
+LOGIC_OR2	VLDR.F32 S0,=-0.1
+			VLDR.F32 S1,=0.7
+			VLDR.F32 S2,=0.7
+			VLDR.F32 S3,=-0.1
+			MOV R0,#1		; a0
+			MOV R1,#0		; a1
+			MOV R2,#1		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
+			B EXP_CALC
+			LTORG
+			
+LOGIC_OR3	VLDR.F32 S0,=-0.1
+			VLDR.F32 S1,=0.7
+			VLDR.F32 S2,=0.7
+			VLDR.F32 S3,=-0.1
+			MOV R0,#1		; a0
+			MOV R1,#1		; a1
+			MOV R2,#0		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
+			B EXP_CALC
+			LTORG
+			
+LOGIC_OR4	VLDR.F32 S0,=-0.1
+			VLDR.F32 S1,=0.7
+			VLDR.F32 S2,=0.7
+			VLDR.F32 S3,=-0.1
+			MOV R0,#1		; a0
+			MOV R1,#1		; a1
+			MOV R2,#1		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
+			B EXP_CALC
+			LTORG
+
+LOGIC_NOT1	BL printNot
+			VLDR.F32 S0,=0.5
+			VLDR.F32 S1,=0
+			VLDR.F32 S2,=-0.7
 			VLDR.F32 S3,=0.1
+			MOV R0,#1		; a0
+			MOV R1,#0		; a1
+			MOV R2,#0		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
 			B EXP_CALC
+			LTORG
 			
-LOGIC_NAND	VLDR.F32 S0,=0.6
+LOGIC_NOT2	VLDR.F32 S0,=0.5
+			VLDR.F32 S1,=0
+			VLDR.F32 S2,=-0.7
+			VLDR.F32 S3,=0.1
+			MOV R0,#1		; a0
+			MOV R1,#0		; a1
+			MOV R2,#1		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
+			B EXP_CALC
+			LTORG
+
+LOGIC_NAND1	BL printNand
+			VLDR.F32 S0,=0.6
 			VLDR.F32 S1,=-0.8
 			VLDR.F32 S2,=-0.8
 			VLDR.F32 S3,=0.3
+			MOV R0,#1		; a0
+			MOV R1,#0		; a1
+			MOV R2,#0		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
 			B EXP_CALC
+			LTORG
 			
-LOGIC_NOR	VLDR.F32 S0,=0.5
+LOGIC_NAND2	VLDR.F32 S0,=0.6
+			VLDR.F32 S1,=-0.8
+			VLDR.F32 S2,=-0.8
+			VLDR.F32 S3,=0.3
+			MOV R0,#1		; a0
+			MOV R1,#0		; a1
+			MOV R2,#1		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
+			B EXP_CALC
+			LTORG
+			
+LOGIC_NAND3	VLDR.F32 S0,=0.6
+			VLDR.F32 S1,=-0.8
+			VLDR.F32 S2,=-0.8
+			VLDR.F32 S3,=0.3
+			MOV R0,#1		; a0
+			MOV R1,#1		; a1
+			MOV R2,#0		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
+			B EXP_CALC
+			LTORG
+			
+LOGIC_NAND4	VLDR.F32 S0,=0.6
+			VLDR.F32 S1,=-0.8
+			VLDR.F32 S2,=-0.8
+			VLDR.F32 S3,=0.3
+			MOV R0,#1		; a0
+			MOV R1,#1		; a1
+			MOV R2,#1		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
+			B EXP_CALC
+			LTORG
+
+LOGIC_NOR1	BL printNor
+			VLDR.F32 S0,=0.5
 			VLDR.F32 S1,=-0.7
 			VLDR.F32 S2,=-0.7
 			VLDR.F32 S3,=0.1
+			MOV R0,#1		; a0
+			MOV R1,#0		; a1
+			MOV R2,#0		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
 			B EXP_CALC
-			
-NXT			CMP R7,#6
-			BEQ LOGIC_XOR
-			
-			CMP R7,#7
-			BEQ LOGIC_XNOR
-			
-LOGIC_XOR	VLDR.F32 S0,=-5
-			VLDR.F32 S1,=20
-			VLDR.F32 S2,=10
-			VLDR.F32 S3,=1
-			B EXP_CALC
-			
-LOGIC_XNOR	VLDR.F32 S0,=-5
-			VLDR.F32 S1,=20
-			VLDR.F32 S2,=10
-			VLDR.F32 S3,=1
-			B EXP_CALC
-			
-;S28 STORES X0*W0 + X1*W1 + X2*W2 + Bias
-EXP_CALC	VMLA.F32 S28, S0, S29
-			VMLA.F32 S28, S1, S30
-			VMLA.F32 S28, S2, S31
-			VADD.F32 S28, S28, S3
-			B EXP
-					
-;e^x stored in S2
-EXP			VMOV.F32 S2, #1 			; Sum Variable
-			VMOV.F32 S6, #25			; 'n' variable - sequence size
-			;VMOV.F32 S1, #5 			; 'x' varaiable - in e^x
-			VMOV.F32 S3, #1 			; constant
-			
-loop		VCMP.F32 S6, #0
-			VMRS.F32 APSR_nzcv,FPSCR 	; Transfer floating-point flags to the APSR flags
-			BEQ SIGMOID
-			VDIV.F32 S4, S2, S6 		; sum/i
-			;VMUL.F32 S5, S1, S4 		; x*sum/i
-			VMUL.F32 S5, S28, S4 		; x*sum/i
-			VADD.F32 S2, S3, S5 		; sum = 1 + (x * (sum/i))
-			VSUB.F32 S6, S6, S3
-			B loop
-			
-SIGMOID		VDIV.F32 S2, S3, S2 		; 1/e^x
-			VADD.F32 S2, S3, S2 		; 1 + 1/e^x
-			VDIV.F32 S2, S3, S2 		; 1/(1 + 1/e^x)
-			B OUTPUT
-		
+			LTORG
 
-;S15 will hold 0.5 for comparison to finalise the logical output for a particular gate
-OUTPUT		VLDR.F32 S15 ,=0.5
-			VCMP.F32 S2, S15 			; compare the output with S15
-			VMRS.F32 APSR_nzcv,FPSCR 	; Transfer floating-point flags to the APSR flags
-			ITE HI
-			MOVHI R3,#1					; if S2 > S15
-			MOVLS R3,#0					; if S2 < S15
-			BL printMsg
+LOGIC_NOR2	VLDR.F32 S0,=0.5
+			VLDR.F32 S1,=-0.7
+			VLDR.F32 S2,=-0.7
+			VLDR.F32 S3,=0.1
+			MOV R0,#1		; a0
+			MOV R1,#0		; a1
+			MOV R2,#1		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
+			B EXP_CALC
+			LTORG
+
+LOGIC_NOR3	VLDR.F32 S0,=0.5
+			VLDR.F32 S1,=-0.7
+			VLDR.F32 S2,=-0.7
+			VLDR.F32 S3,=0.1
+			MOV R0,#1		; a0
+			MOV R1,#1		; a1
+			MOV R2,#0		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
+			B EXP_CALC
+			LTORG
+
+LOGIC_NOR4	VLDR.F32 S0,=0.5
+			VLDR.F32 S1,=-0.7
+			VLDR.F32 S2,=-0.7
+			VLDR.F32 S3,=0.1
+			MOV R0,#1		; a0
+			MOV R1,#1		; a1
+			MOV R2,#1		; a2
+			VMOV.F32 S4,R0
+			VCVT.F32.S32 S4,S4
+			VMOV.F32 S5,R1
+			VCVT.F32.S32 S5,S5
+			VMOV.F32 S6,R2
+			VCVT.F32.S32 S6,S6
+			B EXP_CALC
+			LTORG
+
+
+EXP_CALC	VMUL.F32 S15, S0, S4
+			VMOV.F32 S8, S15
+			VMUL.F32 S16, S1, S5
+			VADD.F32 S8, S8, S16
+			VMUL.F32 S17, S2, S6
+			VADD.F32 S8, S8, S17
+			VADD.F32 S8, S8, S3		; S8 stores the result a0*W0 + a1*W1 + a2*W2 + Bias
+			B INIT_
+							
+INIT_		VMOV.F32 S21, #20		; No of iterations for e^x expansion
+			VMOV.F32 S22, #1		; count
+			VMOV.F32 S23, #1		; tmp
+			VMOV.F32 S24, #1		; result = 1 initially
+			VMOV.F32 S26, #1		; reg to hold 1
+			VMOV.F32 S29, #1			
 			
-stop 		B  stop 
-			endfunc
-			end
+Loop 		VCMP.F32 S21, S22		; comparision to check no of iterations completed
+			VMRS.F32 APSR_nzcv,FPSCR	; copy fpscr to apsr
+			BLT NXT;
+			VDIV.F32 S25, S8, S22	; tmp1=x/count
+			VMUL.F32 S23, S23, S25	; tmp=tmp*tmp1;
+			VADD.F32 S24, S24, S23	; result=result+tmp;
+			VADD.F32 S22, S22, S26	; count++
+			B Loop;
+			
+NXT	 		VADD.F32 S27,S24,S29	; (1+e^x)
+			VDIV.F32 S28,S24,S27	;  g(x) = 1/(1+e^-x) == (e^x)/(1+e^x)
+			B OUTPUT;
+	 
+OUTPUT 	VLDR.F32 S20,=0.5
+		VCMP.F32 S28,S20
+		VMRS.F32 APSR_nzcv,FPSCR	; Transfer floating-point flags to the APSR flags
+		ITE HI						; if g(x) > S20 , print 1 else print 0
+		MOVHI R3,#1
+		MOVLS R3,#0		
+		BL printMsg4p
+		ADD R4,R4,#1;	
+		CMP R4,#1
+		BEQ LOGIC_AND2
+		CMP R4,#2
+		BEQ LOGIC_AND3
+		CMP R4,#3
+		BEQ LOGIC_AND4
+		CMP R4,#4
+		BEQ LOGIC_OR1
+		CMP R4,#5
+		BEQ LOGIC_OR2
+		CMP R4,#6
+		BEQ LOGIC_OR3
+		CMP R4,#7
+		BEQ LOGIC_OR4
+		CMP R4,#8
+		BEQ LOGIC_NOT1
+		CMP R4,#9
+		BEQ LOGIC_NOT2
+		CMP R4,#10
+		BEQ LOGIC_NAND1
+		CMP R4,#11
+		BEQ LOGIC_NAND2
+		CMP R4,#12
+		BEQ LOGIC_NAND3
+		CMP R4,#13
+		BEQ LOGIC_NAND4
+		CMP R4,#14
+		BEQ LOGIC_NOR1
+		CMP R4,#15
+		BEQ LOGIC_NOR2
+		CMP R4,#16
+		BEQ LOGIC_NOR3
+		CMP R4,#17
+		BEQ LOGIC_NOR4
+
+		
+stop B stop ; stop program
+	 ENDFUNC
+	 END
